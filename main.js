@@ -165,7 +165,7 @@ client.on('ready', () => {
   const audioPlay =  async (guild, song) =>{
     const songQueue = queue.get(guild)
     if(!song){
-      songQueue.voiceChannel.disconnect()
+     
       queue.delete(guild)
       return
     }
