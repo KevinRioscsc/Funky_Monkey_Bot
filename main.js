@@ -180,8 +180,6 @@ client.on('ready', () => {
     })
 
     await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
-    
-
   }
 
 
