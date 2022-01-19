@@ -45,27 +45,11 @@ client.on('ready', () => {
     const r = await yts(search)
     const videos = r.videos.slice( 0, 1 )
     return {title: videos[0].title, url: videos[0].url}
-    /*
-    const stream = ytdl(song.url, {filter: 'audioonly'})
-    const resource = createAudioResource(stream)
-    queue.set(resource, index)
-    index++
-     message.reply(`:thumbsup: Now Playing ***${song.title}***`)*/
-     
-   
  }
- const play_queue = () =>{
-
- }
+ 
  const play_HTTP = async(arg) =>{
    const songInfo = await ytdl.getInfo(arg)
    return {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
-
-  /*
-   const stream = ytdl(arg, {filter: 'audioonly'})
-   const resource = createAudioResource(stream)
-    */
-
  }
  
 
@@ -78,7 +62,7 @@ client.on('ready', () => {
     if(message.content === '!play') return message.reply('play what!?!? be more specific')
     if(message.content === '!pause') return message.channel.send(pauseSong(serverQueue))
     if(message.content === '!resume') return message.channel.send(resumeSong(serverQueue))
-    if(message.content === '!queue') return message.channel.send(lookAtQueue(serverQueue))
+    if(message.content === '!queue') return await message.channel.send(lookAtQueue(serverQueue))
     if(message.content === '!skip'){
       const serverQueue = queue.get(message.guild.id)
 
@@ -174,7 +158,7 @@ client.on('ready', () => {
     const resource = createAudioResource(stream)
     await songQueue.connection.play(resource)
    
-    songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+    await songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       console.log('finished')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
