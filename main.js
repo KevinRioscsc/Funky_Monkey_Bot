@@ -172,7 +172,7 @@ client.on('ready', () => {
     }
     const stream = ytdl(song.url, {filter: 'audioonly'})
     const resource = createAudioResource(stream)
-    songQueue.connection.play(resource)
+    await songQueue.connection.play(resource)
    
     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       console.log('finished')
