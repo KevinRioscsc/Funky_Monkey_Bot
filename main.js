@@ -60,8 +60,8 @@ client.on('ready', () => {
     
 
     if(message.content === '!play') return message.reply('play what!?!? be more specific')
-    if(message.content === '!pause') return message.channel.send(pauseSong(serverQueue))
-    if(message.content === '!resume') return message.channel.send(resumeSong(serverQueue))
+    if(message.content === '!pause') return await message.channel.send(pauseSong(serverQueue))
+    if(message.content === '!resume') return await message.channel.send(resumeSong(serverQueue))
     if(message.content === '!queue') return await message.channel.send(lookAtQueue(serverQueue))
     if(message.content === '!skip'){
       const serverQueue = queue.get(message.guild.id)
