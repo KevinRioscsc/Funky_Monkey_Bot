@@ -16,7 +16,7 @@ require('dotenv').config();
 const queue = new Map()
 // queue(message.guid.id, queue_constructor obj {voice channel, text channel, connections, song[]})
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] })
-global.AbortController = require("node-abort-controller").AbortController;
+
 
 
 
