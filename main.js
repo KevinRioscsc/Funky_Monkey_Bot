@@ -183,12 +183,19 @@ client.on('ready', () => {
      songQueue.connection.on('error', console.warn)
     
      console.log(songQueue.connection.state.status)
+     if(songQueue.connection.state.status === AudioPlayerStatus.Idle){
+      console.log('We are Idle')
+      songQueue.songs.shift()
+      audioPlay(guild, songQueue.songs[0])
+
+     }
+     /*
      songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       
        console.log('We are Idle')
        songQueue.songs.shift()
        audioPlay(guild, songQueue.songs[0])
-    })
+    })*/
   
     await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
