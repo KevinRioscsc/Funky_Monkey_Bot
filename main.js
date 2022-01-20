@@ -162,15 +162,17 @@ client.on('ready', () => {
     const resource = createAudioResource(stream)
      songQueue.connection.play(resource)
      console.log(song.url)
+
+     songQueue.connection.on('error', () => {
+      console.log('something went wrong')
+    })
    
     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       console.log('finished')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
     })
-    songQueue.connection.on('error', () => {
-      console.log('something went wrong')
-    })
+    
 
     await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
