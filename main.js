@@ -165,8 +165,16 @@ client.on('ready', () => {
     }
     const playStream = await stream(song.url)
     const resource = createAudioResource(playStream.stream, { inputType: playStream.type })
-     songQueue.connection.play(resource)
-      console.log(songQueue.connection.state.status)
+
+    if(resource){
+      console.log('we have resource')
+    }
+    else{
+      console.log('we do not have resource')
+    }
+      
+     await songQueue.connection.play(resource)
+      
 
      songQueue.connection.on(AudioPlayerStatus.Playing, () => {
         console.log("we are playing")
