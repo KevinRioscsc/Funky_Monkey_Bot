@@ -162,19 +162,21 @@ client.on('ready', () => {
     const stream = ytdl(song.url, {filter: 'audioonly'})
     const resource = createAudioResource(stream)
      songQueue.connection.play(resource)
+      console.log(songQueue.connection.state.status)
+
      songQueue.connection.on(AudioPlayerStatus.Playing, () => {
         console.log("we are playing")
     })
 
-     songQueue.connection.on('error', () => {
-      console.log('something went wrong')
-    })
+     songQueue.connection.on('error', console.warn)
     
+     console.log(songQueue.connection.state.status)
     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       console.log('We are Idle')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
     })
+    console.log(songQueue.connection.state.status)
     
 
     await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
