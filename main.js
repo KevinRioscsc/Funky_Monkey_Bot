@@ -1,4 +1,5 @@
 const { Client, Intents } = require('discord.js');
+const {video_basic_info, stream} = require('play-dl')
 const yts = require('yt-search')
 const ytdl = require('ytdl-core')
 const {
@@ -159,8 +160,8 @@ client.on('ready', () => {
       queue.delete(guild)
       return
     }
-    const stream = ytdl(song.url, {filter: 'audioonly'})
-    const resource = createAudioResource(stream)
+    const playStream = await stream(song.url)
+    const resource = createAudioResource(playStream.stream, { inputType: playStream.type })
      songQueue.connection.play(resource)
       console.log(songQueue.connection.state.status)
 
