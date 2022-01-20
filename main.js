@@ -174,9 +174,9 @@ client.on('ready', () => {
      console.log(songQueue.connection.state.status)
     songQueue.connection.on(AudioPlayerStatus.Idle, async() => {
       
-      console.log('We are Idle')
-      songQueue.songs.shift()
-      audioPlay(guild, songQueue.songs[0])
+       console.log('We are Idle')
+      await songQueue.songs.shift()
+      await audioPlay(guild, songQueue.songs[0])
     })
     console.log(songQueue.connection.state.status)
     
