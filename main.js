@@ -105,11 +105,12 @@ client.on('ready', () => {
           })
           queueConstructor.voiceChannel = connection
           queueConstructor.connection = createAudioPlayer({
-
-          })
+            behaviors: {
+              noSubscriber: NoSubscriberBehavior.Pause,
+            },
+          });
           
           connection.subscribe(queueConstructor.connection)
-          connection.
           audioPlay(message.guildId, queueConstructor.songs[0])
         } catch (err) {
           queue.delete(message.guildId)
