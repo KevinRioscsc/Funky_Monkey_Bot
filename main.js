@@ -125,6 +125,7 @@ client.on('ready', () => {
     }
   });
   const resumeSong = (serverQueue) =>{
+
     serverQueue.connection.unpause()
 
     return `*** ${serverQueue.songs[0].title} ***  has resumed. Enjoy!!`
@@ -166,7 +167,7 @@ client.on('ready', () => {
      songQueue.connection.on('error', () => {
       console.log('something went wrong')
     })
-   
+    console.log(songQueue.connection.state)
     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       console.log('finished')
       songQueue.songs.shift()
