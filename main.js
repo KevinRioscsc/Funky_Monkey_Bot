@@ -172,7 +172,8 @@ client.on('ready', () => {
      songQueue.connection.on('error', console.warn)
     
      console.log(songQueue.connection.state.status)
-    songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+    songQueue.connection.on(AudioPlayerStatus.Idle, async() => {
+      
       console.log('We are Idle')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
