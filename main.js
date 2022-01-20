@@ -113,6 +113,7 @@ client.on('ready', () => {
           });
           
           connection.subscribe(queueConstructor.connection)
+          console.log("this is the try method")
           audioPlay(message.guildId, queueConstructor.songs[0])
         } catch (err) {
           queue.delete(message.guildId)
@@ -156,6 +157,7 @@ client.on('ready', () => {
   }
   const audioPlay =  async (guild, song) =>{
     const songQueue = queue.get(guild)
+    console.log('we are running audioPlay')
     if(!song){
      
       queue.delete(guild)
@@ -179,9 +181,7 @@ client.on('ready', () => {
        songQueue.songs.shift()
        audioPlay(guild, songQueue.songs[0])
     })
-    console.log(songQueue.connection.state.status)
-    
-
+  
     await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
 
