@@ -71,7 +71,8 @@ client.on('ready', () => {
       audioPlay(message.guild.id, serverQueue.songs[0])
     }
     if (message.content.includes('!play')) {
-      
+      console.log("we ran the command")
+
       if(!message.member.voice.channel){
         return message.reply('You must be in the voice channel')
       }
@@ -172,7 +173,7 @@ client.on('ready', () => {
      songQueue.connection.on('error', console.warn)
     
      console.log(songQueue.connection.state.status)
-    await songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
       
        console.log('We are Idle')
        songQueue.songs.shift()
