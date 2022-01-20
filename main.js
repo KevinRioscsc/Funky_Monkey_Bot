@@ -162,14 +162,16 @@ client.on('ready', () => {
     const stream = ytdl(song.url, {filter: 'audioonly'})
     const resource = createAudioResource(stream)
      songQueue.connection.play(resource)
-     console.log(song.url)
+     songQueue.connection.on(AudioPlayerStatus.Playing, () => {
+        console.log("we are playing")
+    })
 
      songQueue.connection.on('error', () => {
       console.log('something went wrong')
     })
-    console.log(songQueue.connection.state)
-    songQueue.connection.on(AudioPlayerStatus.Idle, () => {
-      console.log('finished')
+    
+    songQueue.connection.on(AudioPlayerStatus.Buffering, () => {
+      console.log('We are buffering')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
     })
