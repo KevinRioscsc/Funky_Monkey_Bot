@@ -170,8 +170,8 @@ client.on('ready', () => {
       console.log('something went wrong')
     })
     
-    songQueue.connection.on(AudioPlayerStatus.Buffering, () => {
-      console.log('We are buffering')
+    songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+      console.log('We are Idle')
       songQueue.songs.shift()
       audioPlay(guild, songQueue.songs[0])
     })
