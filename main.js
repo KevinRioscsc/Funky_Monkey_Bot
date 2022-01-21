@@ -173,24 +173,17 @@ client.on('ready', () => {
       console.log('we do not have resource')
     }
       
-     await songQueue.connection.play(resource)
+     songQueue.connection.play(resource)
      songQueue.songs.shift()
       
 
-     songQueue.connection.on(AudioPlayerStatus.Playing, () => {
-        console.log("we are playing")
-    })
-
-     songQueue.connection.on('error', console.warn)
-    
-     console.log(songQueue.connection.state.status)
-     
+     songQueue.connection.on('error', console.warn) 
      
      songQueue.connection.on(AudioPlayerStatus.Idle, () => {
        audioPlay(guild, songQueue.songs[0])
     })
   
-    await songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
+    songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
 
 
