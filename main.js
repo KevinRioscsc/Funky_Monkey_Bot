@@ -174,6 +174,7 @@ client.on('ready', () => {
     }
       
      await songQueue.connection.play(resource)
+     songQueue.songs.shift()
       
 
      songQueue.connection.on(AudioPlayerStatus.Playing, () => {
@@ -186,9 +187,6 @@ client.on('ready', () => {
      
      
      songQueue.connection.on(AudioPlayerStatus.Idle, () => {
-      
-       console.log('We are Idle')
-       songQueue.songs.shift()
        audioPlay(guild, songQueue.songs[0])
     })
   
