@@ -174,15 +174,16 @@ client.on('ready', () => {
     }
       
      songQueue.connection.play(resource)
-     songQueue.songs.shift()
-      audioPlay(guild, songQueue.songs[0])
+     
       
 
      songQueue.connection.on('error', console.warn) 
      
-    
-      
-    
+     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+       console.log(songQueue.songs[0])
+       songQueue.songs.shift()
+       audioPlay(guild, songQueue.songs[0])
+    })
   
     songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
