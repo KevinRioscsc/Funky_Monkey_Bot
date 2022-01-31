@@ -112,7 +112,7 @@ client.on('ready', () => {
             },
           });
           
-          connection.subscribe(queueConstructor.connection)
+          queueConstructor.connection.subscribe(queueConstructor.connection)
           console.log("this is the try method")
           audioPlay(message.guildId, queueConstructor.songs[0])
         } catch (err) {
