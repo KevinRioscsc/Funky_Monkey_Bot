@@ -137,7 +137,7 @@ client.on('ready', () => {
   });
 
   client.on('speech', (msg) => {
-    msg.author.send(msg.content)
+    msg.channel.send(msg.content)
   })
   const resumeSong = (serverQueue) =>{
 
