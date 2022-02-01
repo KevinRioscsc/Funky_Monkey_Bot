@@ -158,7 +158,7 @@ client.on('ready', () => {
   }
   const audioPlay =  async (guild, song) =>{
     const songQueue = queue.get(guild)
-    console.log('we are running audioPlay')
+    
     if(!song){
      
       queue.delete(guild)
@@ -167,13 +167,7 @@ client.on('ready', () => {
     const playStream = await stream(song.url)
     const resource = createAudioResource(playStream.stream, { inputType: playStream.type })
 
-    if(resource){
-      console.log('we have resource')
-    }
-    else{
-      console.log('we do not have resource')
-    }
-      
+    
      songQueue.connection.play(resource)
      
       
