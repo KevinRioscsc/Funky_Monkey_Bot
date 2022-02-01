@@ -122,6 +122,7 @@ client.on('ready', () => {
         }
       } else{
         serverQueue.songs.push(song)
+        console.log('this is else statement')
         return message.channel.send(`:thumbsup: ***${song.title}*** added to the queue`)
       }
       
@@ -181,10 +182,10 @@ client.on('ready', () => {
      
      songQueue.connection.on(AudioPlayerStatus.Idle, () => {
 
-       if(songQueue.songs[0]){
+      console.log('idle')
        songQueue.songs.shift()
        audioPlay(guild, songQueue.songs[0])
-       }
+       
     })
   
     songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
