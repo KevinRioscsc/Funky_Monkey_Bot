@@ -78,7 +78,7 @@ client.on('ready', () => {
       audioPlay(message.guild.id, serverQueue.songs[0])
     }
     if (message.content.includes('!play')) {
-      console.log("we ran the command")
+      
 
       if(!message.member.voice.channel){
         return message.reply('You must be in the voice channel')
@@ -153,19 +153,23 @@ client.on('ready', () => {
 
   }
   const lookAtQueue = (serverQueue) =>{
-    let message = ''
-    message =  'Now Playing: ' + '***' + serverQueue.songs[0].title  + '***' + '\n' 
-    for(let i = 0; i < serverQueue.songs.length; i++){
-      if(i === 0){
-        continue
-      } 
-      if(i === 1){
-        message += '\nNext Up:'  + ' ' + '***' + serverQueue.songs[i].title + '***' + '\n'
-        continue
-      }
-      message += '\nSong ' + i + ' '  + '***' + serverQueue.songs[i].title  + '***' + '\n'
-    }
-    return message
+    try{
+        let message = ''
+        message =  'Now Playing: ' + '***' + serverQueue.songs[0].title  + '***' + '\n' 
+        for(let i = 0; i < serverQueue.songs.length; i++){
+          if(i === 0){
+            continue
+          } 
+          if(i === 1){
+            message += '\nNext Up:'  + ' ' + '***' + serverQueue.songs[i].title + '***' + '\n'
+            continue
+          }
+          message += '\nSong ' + i + ' '  + '***' + serverQueue.songs[i].title  + '***' + '\n'
+        }
+        return message
+  }catch(err){
+    return 'There is no song in the queue'
+  }
   }
   const audioPlay =  async (guild, song) =>{
     const songQueue = queue.get(guild)
