@@ -12,6 +12,7 @@ const {
   NoSubscriberBehavior,
   createAudioResource,
 } =  require('@discordjs/voice');
+const { addSpeechEvent } = require("discord-speech-recognition");
 
 require('dotenv').config();
 const queue = new Map()
