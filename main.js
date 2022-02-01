@@ -174,21 +174,15 @@ client.on('ready', () => {
 
      songQueue.connection.on('error', console.warn) 
 
-     songQueue.connection.addListener('stateChange', (oldOne, newOne) => {
-       if(newOne.status === 'idle'){
-         console.log(newOne)
-          songQueue.songs.shift()
-          audioPlay(guild, songQueue.songs[0])
-       }
-     })
-     /*
-     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
+     
+     
+     songQueue.connection.once(AudioPlayerStatus.Idle, () => {
 
       console.log('idle')
        songQueue.songs.shift()
        audioPlay(guild, songQueue.songs[0])
        
-    })*/
+    })
   
     songQueue.textChannel.send(`:thumbsup: Now Playing ***${song.title}***`)
   }
