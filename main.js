@@ -112,7 +112,7 @@ client.on('ready', () => {
             },
           });
           
-          connection.subscribe(queueConstructor.connection)
+         
           console.log("this is the try method")
           audioPlay(message.guildId, queueConstructor.songs[0])
         } catch (err) {
@@ -160,13 +160,13 @@ client.on('ready', () => {
     const songQueue = queue.get(guild)
     
     if(!song){
-     
+      
       queue.delete(guild)
       return
     }
     const playStream = await stream(song.url)
     const resource = createAudioResource(playStream.stream, { inputType: playStream.type })
-
+    songQueue.voiceChannel.subscribe(songQueue.connection)
     
      songQueue.connection.play(resource)
      
