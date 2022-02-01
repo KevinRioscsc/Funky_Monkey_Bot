@@ -176,6 +176,7 @@ client.on('ready', () => {
 
      songQueue.connection.addListener('stateChange', (oldOne, newOne) => {
        if(newOne.status === 'idle'){
+         console.log(newOne)
           songQueue.songs.shift()
           audioPlay(guild, songQueue.songs[0])
        }
