@@ -141,10 +141,10 @@ client.on('ready', () => {
       
     }
   });
-
+/*
   client.on('speech', (msg) => {
     msg.channel.send(msg.content)
-  })
+  })*/
   const resumeSong = (serverQueue) =>{
 
     serverQueue.connection.unpause()
