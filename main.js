@@ -66,7 +66,13 @@ client.on('ready', () => {
   client.on('messageCreate', async(message) => {
     const serverQueue = queue.get(message.guild.id)
     
-
+    if(message.content === "!join"){
+      joinVoiceChannel({
+        channelId: message.member.voice.channel.id,
+        guildId: message.member.voice.channel.guild.id,
+        adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator
+    })
+    }
     if(message.content === '!play') return message.reply('play what!?!? be more specific')
     if(message.content === '!pause') return  message.channel.send(pauseSong(serverQueue))
     if(message.content === '!resume') return  message.channel.send(resumeSong(serverQueue))
