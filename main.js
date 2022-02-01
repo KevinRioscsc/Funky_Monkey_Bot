@@ -17,11 +17,6 @@ require('dotenv').config();
 const queue = new Map()
 // queue(message.guid.id, queue_constructor obj {voice channel, text channel, connections, song[]})
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES] })
-const audio = createAudioPlayer({
-  behaviors: {
-    noSubscriber: NoSubscriberBehavior.Pause,
-  },
-});
 
 
 
@@ -111,7 +106,13 @@ client.on('ready', () => {
               adapterCreator: message.member.voice.channel.guild.voiceAdapterCreator
           })
           queueConstructor.voiceChannel = connection
-          connection.subscribe(audio)
+          queueConstructor.connection = createAudioPlayer({
+            behaviors: {
+              noSubscriber: NoSubscriberBehavior.Pause,
+            },
+          });
+          
+          connection.subscribe(queueConstructor.connection)
           console.log("this is the try method")
           audioPlay(message.guildId, queueConstructor.songs[0])
         } catch (err) {
@@ -172,13 +173,13 @@ client.on('ready', () => {
       console.log('we do not have resource')
     }
       
-     audio.play(resource)
+     songQueue.connection.play(resource)
      
       
 
-     //songQueue.connection.on('error', console.warn) 
+     songQueue.connection.on('error', console.warn) 
      
-     audio.on(AudioPlayerStatus.Idle, () => {
+     songQueue.connection.on(AudioPlayerStatus.Idle, () => {
 
        if(songQueue.songs[0]){
        songQueue.songs.shift()
