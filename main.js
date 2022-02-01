@@ -13,6 +13,7 @@ const {
   createAudioResource,
 } =  require('@discordjs/voice');
 const { addSpeechEvent } = require("discord-speech-recognition");
+const { maxHeaderSize } = require('http');
 
 require('dotenv').config();
 const queue = new Map()
@@ -42,7 +43,7 @@ client.on('ready', () => {
      return false
    }
  }
-
+ 
  const play_keyWords = async(search) =>{
     const r = await yts(search)
     const videos = r.videos.slice( 0, 1 )
@@ -50,11 +51,16 @@ client.on('ready', () => {
  }
  
  const play_HTTP = async(arg) =>{
-   const songInfo = await ytdl.getInfo(arg)
-   return {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
+   try{
+      const songInfo = await ytdl.getInfo(arg)
+      return {title: songInfo.videoDetails.title, url:songInfo.videoDetails.video_url}
+   }
+   catch (err){
+     console.warn('uh oh something bad happend', err)
+   }
  }
  
-
+  addSpeechEvent(client)
   
 
   client.on('messageCreate', async(message) => {
@@ -129,6 +135,10 @@ client.on('ready', () => {
       
     }
   });
+
+  client.on('speech', (msg) => {
+    msg.author.send(msg.content)
+  })
   const resumeSong = (serverQueue) =>{
 
     serverQueue.connection.unpause()
