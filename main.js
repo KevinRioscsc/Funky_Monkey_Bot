@@ -28,13 +28,7 @@ client.on('ready', () => {
   });
 
 
- const searching = async(search, message) =>{
-   const r = await yts(search)
-   const videos = r.videos.slice( 0, 1 )
-   return(videos[0])
-  
-
- }
+ 
  const checkArgs = (arg) =>{
    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/
    if(regex.test(arg)){
@@ -47,6 +41,7 @@ client.on('ready', () => {
  const play_keyWords = async(search) =>{
     const r = await yts(search)
     const videos = r.videos.slice( 0, 1 )
+    console.log(videos)
     return {title: videos[0].title, url: videos[0].url}
  }
  
