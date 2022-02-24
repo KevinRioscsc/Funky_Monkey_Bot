@@ -39,11 +39,11 @@ client.on('ready', () => {
  }
  
  const play_keyWords = async(search) =>{
-    console.log(search)
+    
     const r = await yts(search)
-    console.log(r)
+   
     const videos = r.videos.slice( 0, 1 )
-    console.log(videos)
+    
     return {title: videos[0].title, url: videos[0].url}
  }
  
